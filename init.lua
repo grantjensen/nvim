@@ -152,6 +152,10 @@ vim.o.splitbelow = true
 vim.o.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- Relative line number
+vim.opt.number = true
+vim.opt.relativenumber = true
+
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
 
@@ -176,13 +180,20 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Enter terminal mode and run last command
+vim.keymap.set('n', '<A-CR>', 'i!!<CR>', { desc = 'run last terminal command in normal mode' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set({ 't', 'i', 'n' }, '<A-h>', '<C-\\><C-N><C-w>h', { desc = 'Move one window left' })
+vim.keymap.set({ 't', 'i', 'n' }, '<A-j>', '<C-\\><C-N><C-w>j', { desc = 'Move one window down' })
+vim.keymap.set({ 't', 'i', 'n' }, '<A-k>', '<C-\\><C-N><C-w>k', { desc = 'Move one window up' })
+vim.keymap.set({ 't', 'i', 'n' }, '<A-l>', '<C-\\><C-N><C-w>l', { desc = 'Move one window right' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
